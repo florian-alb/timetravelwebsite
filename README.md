@@ -1,46 +1,38 @@
-# TimeTravelAgency — Webapp Interactive
+# TimeTravel Agency - Webapp Interactive
 
-Webapp immersive pour une agence de voyage temporel fictive.
+Webapp pour une agence de voyage temporel fictive, créée avec IA générative.
 
-## Stack Technique
-
-- Next.js 16 (App Router) + TypeScript
+## 🛠️ Stack Technique
+- Next.js 16 + React 19 + TypeScript
 - Tailwind CSS v4
-- Framer Motion (animations)
-- [Mistral AI / Groq / OpenAI] pour le chatbot
+- Framer Motion
+- Mistral AI API (fallback Groq / OpenAI)
+- Hébergement : Vercel
 
-## Features
-
-- Landing page avec hero animé et quiz de recommandation
-- Galerie de 3 destinations temporelles (Crétacé, Florence, Paris)
+## ✨ Features
+- Landing page interactive avec animations
+- Galerie de 3 destinations temporelles (Crétacé, Florence, Paris 1889)
 - Chatbot IA conversationnel (page dédiée + widget flottant)
-- Formulaire de réservation avec confirmation simulée
+- Quiz de recommandation de destination
+- Formulaire de réservation
 
-## Installation
+## 🤖 IA Utilisées
+- Code : Bolt.new (Claude 3.5 Sonnet)
+- Chatbot : Mistral Small via API
+- Visuels : Midjourney + Runway (Projet 1)
+
+## 🚀 Lancer le projet
 
 ```bash
 npm install
-cp .env.example .env.local
-
-# Renseigner votre clé API dans .env.local
-
 npm run dev
 ```
 
-Ouvrir http://localhost:3000
+Ajouter un fichier `.env.local` avec :
 
-## Images
+```env
+MISTRAL_API_KEY=...
+```
 
-Placer vos images dans `/public/images/` :
-
-- `cretace.jpg`
-- `florence.jpg`
-- `paris.jpg`
-
-Des gradients colorés sont utilisés en fallback si les images sont absentes.
-
-## Déploiement
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
-
-Déployer sur Vercel et ajouter la variable d'environnement de votre provider IA dans les settings du projet.
+## 📄 Licence
+Projet pédagogique - M1/M2 Digital & IA

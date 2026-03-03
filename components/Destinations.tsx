@@ -102,6 +102,7 @@ function DestinationCard({
   index: number;
 }) {
   const [imgError, setImgError] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const Icon = dest.profileIcon;
 
   return (
@@ -110,12 +111,24 @@ function DestinationCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
       className="relative overflow-hidden"
       style={{
         minHeight: "500px",
         background: `linear-gradient(135deg, ${dest.gradientFrom} 0%, ${dest.gradientTo} 100%)`,
       }}
     >
+      {/* Hover glow overlay */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-0"
+        animate={{
+          opacity: hovered ? 1 : 0,
+          background: `radial-gradient(ellipse at 60% 50%, ${dest.accentColor}12 0%, transparent 70%)`,
+        }}
+        transition={{ duration: 0.5 }}
+      />
+
       {/* Content + Image layout */}
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 w-full flex flex-col md:flex-row items-center gap-8 py-12 md:py-20">
@@ -124,22 +137,28 @@ function DestinationCard({
             className="block md:order-2 md:flex-1 relative rounded-2xl overflow-hidden w-full shrink-0"
             style={{ height: "clamp(220px, 35vw, 420px)" }}
           >
-            {!imgError ? (
-              <Image
-                src={dest.image}
-                alt={dest.name}
-                fill
-                className="object-cover"
-                onError={() => setImgError(true)}
-              />
-            ) : (
-              <div
-                className="w-full h-full"
-                style={{
-                  background: `linear-gradient(135deg, ${dest.gradientTo}, ${dest.gradientFrom})`,
-                }}
-              />
-            )}
+            <motion.div
+              className="absolute inset-0"
+              animate={{ scale: hovered ? 1.05 : 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              {!imgError ? (
+                <Image
+                  src={dest.image}
+                  alt={dest.name}
+                  fill
+                  className="object-cover"
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                <div
+                  className="w-full h-full"
+                  style={{
+                    background: `linear-gradient(135deg, ${dest.gradientTo}, ${dest.gradientFrom})`,
+                  }}
+                />
+              )}
+            </motion.div>
             <div
               className="absolute inset-0"
               style={{
@@ -193,17 +212,25 @@ function DestinationCard({
                 {dest.profile}
               </span>
 
-              <a
+              <motion.a
                 href="#reserver"
-                className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium tracking-wider uppercase rounded transition-all duration-300 hover:gap-4"
+                className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium tracking-wider uppercase rounded"
                 style={{
                   backgroundColor: dest.accentColor,
                   color: "#0a0a0a",
                 }}
+                whileHover={{ scale: 1.04, gap: "12px" }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.25 }}
               >
                 Réserver
-                <ArrowRight size={14} />
-              </a>
+                <motion.span
+                  animate={{ x: hovered ? 3 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <ArrowRight size={14} />
+                </motion.span>
+              </motion.a>
             </div>
           </div>
 

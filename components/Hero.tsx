@@ -68,7 +68,14 @@ export default function Hero() {
         >
           Traversez
           <br />
-          <span className="text-[#c9a84c]">les siècles.</span>
+          <motion.span
+            className="text-[#c9a84c] inline-block"
+            initial={{ opacity: 0, scale: 0.92, filter: "blur(8px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.9, delay: 0.85, ease: "easeOut" }}
+          >
+            les siècles.
+          </motion.span>
         </motion.h1>
 
         <motion.p

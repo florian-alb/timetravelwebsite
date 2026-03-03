@@ -1,7 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut", delay },
+  }),
+};
 
 export default function Footer() {
   return (
@@ -9,7 +19,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10">
           {/* Brand */}
-          <div className="sm:col-span-1">
+          <motion.div
+            className="sm:col-span-1"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            variants={fadeUp}
+          >
             <div className="flex items-center gap-2 mb-3">
               <Clock className="text-[#c9a84c]" size={20} />
               <span
@@ -22,10 +39,16 @@ export default function Footer() {
             <p className="text-[#ededed]/40 text-sm leading-relaxed max-w-xs">
               L&apos;agence de voyage temporel de luxe. Explorez l&apos;histoire, vivez l&apos;extraordinaire.
             </p>
-          </div>
+          </motion.div>
 
           {/* Navigation */}
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.1}
+            variants={fadeUp}
+          >
             <h4 className="text-[#ededed]/60 text-xs tracking-widest uppercase mb-4">
               Navigation
             </h4>
@@ -55,10 +78,16 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Legal */}
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.2}
+            variants={fadeUp}
+          >
             <h4 className="text-[#ededed]/60 text-xs tracking-widest uppercase mb-4">
               Informations
             </h4>
@@ -76,17 +105,23 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="border-t border-[#c9a84c]/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="border-t border-[#c9a84c]/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4"
+        >
           <p className="text-[#ededed]/30 text-xs text-center">
             © 2024 TimeTravelAgency — Tous droits réservés à travers le temps.
           </p>
           <p className="text-[#ededed]/20 text-xs">
             Agréé par le Bureau International du Voyage Temporel (BIVT)
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
